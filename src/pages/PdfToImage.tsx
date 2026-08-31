@@ -6,7 +6,7 @@ import { QualitySlider } from '../components/QualitySlider'
 import { SecondaryButton } from '../components/SecondaryButton'
 import { ToolPageHeader } from '../components/ToolPageHeader'
 import { formatBytes } from '../lib/format'
-import { getPdfPageCount, type PdfPageImage, pdfPagesToImages } from '../lib/pdfProcessing'
+import { getPdfErrorMessage, getPdfPageCount, type PdfPageImage, pdfPagesToImages } from '../lib/pdfProcessing'
 
 type OutputFormat = 'png' | 'jpeg'
 type PageSelection = 'all' | 'custom'
@@ -35,8 +35,8 @@ export function PdfToImage() {
             const count = await getPdfPageCount(selected)
             setPageCount(count)
             setSelectedPages(new Set([1]))
-        } catch {
-            setError('Could not read this PDF file. It may be corrupted or password-protected.')
+        } catch (err) {
+            setError(getPdfErrorMessage(err))
         }
     }
 
@@ -70,8 +70,8 @@ export function PdfToImage() {
         try {
             const pages = await pdfPagesToImages(file, format, quality / 100, pageNumbers)
             setResults(pages)
-        } catch {
-            setError('Something went wrong while converting your PDF. Please try again.')
+        } catch (err) {
+            setError(getPdfErrorMessage(err))
         } finally {
             setProcessing(false)
         }

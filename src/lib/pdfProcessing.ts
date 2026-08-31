@@ -4,6 +4,17 @@ import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.mjs?url'
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker
 
+export function getPdfErrorMessage(error: unknown): string {
+    if (error instanceof Error && error.name === 'PasswordException') {
+        return 'This PDF is password-protected. Remove the password and try again.'
+    }
+    if (error instanceof pdfjsLib.InvalidPDFException) {
+        return 'This file could not be read as a PDF. It may be corrupted.'
+    }
+    console.error('PDF processing error:', error)
+    return 'Something went wrong while processing your PDF. Please try again.'
+}
+
 export async function mergePdfs(files: File[]): Promise<Blob> {
     const mergedPdf = await PDFDocument.create()
 

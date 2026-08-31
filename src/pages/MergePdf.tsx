@@ -66,7 +66,8 @@ export function MergePdf() {
         try {
             const blob = await mergePdfs(items.map((item) => item.file))
             setResult({ blob, url: URL.createObjectURL(blob) })
-        } catch {
+        } catch (err) {
+            console.error('PDF merge error:', err)
             setError('Something went wrong while merging your PDFs. Please try again.')
         } finally {
             setProcessing(false)
