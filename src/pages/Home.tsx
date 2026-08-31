@@ -1,4 +1,4 @@
-import { FileStack, ImageIcon, Images, Shrink } from 'lucide-react'
+import { FileSpreadsheet, FileStack, Files, ImageIcon, Images, Shrink } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { PrimaryButton } from '../components/PrimaryButton'
 import { SecondaryButton } from '../components/SecondaryButton'
@@ -10,6 +10,8 @@ const ICONS: Record<string, React.ReactNode> = {
     'image-compressor': <Shrink size={18} aria-hidden="true" />,
     'merge-pdf': <FileStack size={18} aria-hidden="true" />,
     'pdf-to-image': <Images size={18} aria-hidden="true" />,
+    'excel-converter': <FileSpreadsheet size={18} aria-hidden="true" />,
+    'merge-excel': <Files size={18} aria-hidden="true" />,
 }
 
 export function Home() {
@@ -20,8 +22,8 @@ export function Home() {
                     Simple tools for working with your files.
                 </h1>
                 <p className="mt-4 text-lg text-[var(--color-text-muted)]">
-                    Convert images, compress files, merge PDFs, and turn PDF pages into images — quickly and
-                    without unnecessary complexity.
+                    Convert images, compress files, merge PDFs, turn PDF pages into images, and work with
+                    spreadsheets — quickly and without unnecessary complexity.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
                     <Link to="/image-tools">
@@ -29,6 +31,9 @@ export function Home() {
                     </Link>
                     <Link to="/pdf-tools">
                         <SecondaryButton>Explore PDF Tools</SecondaryButton>
+                    </Link>
+                    <Link to="/excel-tools">
+                        <SecondaryButton>Explore Excel Tools</SecondaryButton>
                     </Link>
                 </div>
             </section>

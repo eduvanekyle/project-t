@@ -2,7 +2,7 @@ export interface ToolMeta {
     slug: string
     name: string
     description: string
-    category: 'image' | 'pdf'
+    category: 'image' | 'pdf' | 'excel'
     path: string
 }
 
@@ -34,5 +34,19 @@ export const tools: ToolMeta[] = [
         description: 'Convert PDF pages into JPG or PNG images.',
         category: 'pdf',
         path: '/pdf-tools/to-image',
+    },
+    {
+        slug: 'excel-converter',
+        name: 'Excel Converter',
+        description: 'Convert between XLSX, XLS, and CSV files.',
+        category: 'excel',
+        path: '/excel-tools/converter',
+    },
+    {
+        slug: 'merge-excel',
+        name: 'Merge Excel',
+        description: 'Combine multiple spreadsheets into one file.',
+        category: 'excel',
+        path: '/excel-tools/merge',
     },
 ]

@@ -8,6 +8,7 @@ const NAV_LINKS = [
     { to: '/', label: 'Home', end: true },
     { to: '/image-tools', label: 'Image Tools', end: false },
     { to: '/pdf-tools', label: 'PDF Tools', end: false },
+    { to: '/excel-tools', label: 'Excel Tools', end: false },
 ]
 
 export function AppHeader() {

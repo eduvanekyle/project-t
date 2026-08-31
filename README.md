@@ -12,7 +12,11 @@ A lightweight, privacy-friendly file utility web app. Convert images, compress f
 - **Merge PDF** — Drag and drop multiple PDFs, reorder them, and merge into one document.
 - **PDF to Image** — Export PDF pages as PNG or JPG, individually or as a zip.
 
-All processing happens client-side using the Canvas API, [pdf-lib](https://github.com/Hopding/pdf-lib), and [pdf.js](https://github.com/mozilla/pdf.js) — your files never leave your device.
+### Excel Tools
+- **Excel Converter** — Convert between XLSX, XLS, and CSV with automatic format detection.
+- **Merge Excel** — Combine multiple spreadsheets into one file, either by stacking rows or keeping each file as its own sheet.
+
+All processing happens client-side using the Canvas API, [pdf-lib](https://github.com/Hopding/pdf-lib), [pdf.js](https://github.com/mozilla/pdf.js), and [SheetJS](https://github.com/SheetJS/sheetjs) — your files never leave your device.
 
 ## Tech Stack
 
@@ -22,6 +26,7 @@ All processing happens client-side using the Canvas API, [pdf-lib](https://githu
 - [React Router](https://reactrouter.com/)
 - [@dnd-kit](https://dndkit.com/) for drag-and-drop reordering
 - [pdf-lib](https://github.com/Hopding/pdf-lib) & [pdf.js](https://github.com/mozilla/pdf.js) for PDF processing
+- [SheetJS (xlsx)](https://github.com/SheetJS/sheetjs) for Excel/CSV processing
 - [JSZip](https://stuk.github.io/jszip/) for bundling downloads
 - [lucide-react](https://lucide.dev/) for icons
 

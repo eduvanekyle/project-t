@@ -7,45 +7,36 @@ import { type SortableFile, SortableFileList } from '../components/SortableFileL
 import { SuccessState } from '../components/SuccessState'
 import { ToolPageHeader } from '../components/ToolPageHeader'
 import { formatBytes } from '../lib/format'
+import { ACCEPTED_EXCEL_TYPES, detectExcelFormat, type MergeMode, mergeExcelFiles } from '../lib/excelProcessing'
 import { generateId } from '../lib/id'
-import { getPdfPageCount, mergePdfs } from '../lib/pdfProcessing'
 
 interface Result {
     blob: Blob
     url: string
 }
 
-export function MergePdf() {
+export function MergeExcel() {
     const [items, setItems] = useState<SortableFile[]>([])
+    const [mode, setMode] = useState<MergeMode>('rows')
     const [error, setError] = useState<string | null>(null)
     const [isProcessing, setProcessing] = useState(false)
     const [result, setResult] = useState<Result | null>(null)
     const nextInputRef = useRef<HTMLInputElement>(null)
 
     const addFiles = (files: File[]) => {
-        const pdfFiles = files.filter((file) => file.type === 'application/pdf')
-        if (pdfFiles.length === 0) {
-            setError('This file format is not supported. Please upload PDF files only.')
+        const excelFiles = files.filter((file) => detectExcelFormat(file) !== null)
+        if (excelFiles.length === 0) {
+            setError('This file format is not supported. Please upload XLSX, XLS, or CSV files only.')
             return
         }
         setError(null)
         setResult(null)
 
-        const newItems: SortableFile[] = pdfFiles.map((file) => ({
+        const newItems: SortableFile[] = excelFiles.map((file) => ({
             id: generateId(),
             file,
         }))
         setItems((current) => [...current, ...newItems])
-
-        for (const item of newItems) {
-            getPdfPageCount(item.file)
-                .then((pageCount) => {
-                    setItems((current) => current.map((i) => (i.id === item.id ? { ...i, pageCount } : i)))
-                })
-                .catch(() => {
-                    /* leave page count undefined if it can't be read */
-                })
-        }
     }
 
     const removeItem = (id: string) => {
@@ -64,10 +55,10 @@ export function MergePdf() {
         setProcessing(true)
         setError(null)
         try {
-            const blob = await mergePdfs(items.map((item) => item.file))
+            const blob = await mergeExcelFiles(items.map((item) => item.file), mode)
             setResult({ blob, url: URL.createObjectURL(blob) })
         } catch {
-            setError('Something went wrong while merging your PDFs. Please try again.')
+            setError('Something went wrong while merging your files. Please try again.')
         } finally {
             setProcessing(false)
         }
@@ -76,17 +67,17 @@ export function MergePdf() {
     return (
         <div className="mx-auto max-w-2xl px-4 py-12 pb-28 sm:px-6">
             <ToolPageHeader
-                backTo="/pdf-tools"
+                backTo="/excel-tools"
                 backLabel="Back to tools"
-                title="Merge PDF"
-                description="Combine multiple PDF files into one document."
+                title="Merge Excel"
+                description="Combine multiple spreadsheets into one file."
             />
 
             {items.length === 0 && (
                 <FileDropzone
-                    accept="application/pdf"
+                    accept={ACCEPTED_EXCEL_TYPES.join(',')}
                     multiple
-                    formatsLabel="PDF • Max size: 50 MB per file"
+                    formatsLabel="XLSX, XLS, CSV • Max size: 25 MB per file"
                     onFiles={addFiles}
                     error={error}
                 />
@@ -106,7 +97,7 @@ export function MergePdf() {
                     <input
                         ref={nextInputRef}
                         type="file"
-                        accept="application/pdf"
+                        accept={ACCEPTED_EXCEL_TYPES.join(',')}
                         multiple
                         className="hidden"
                         onChange={(event) => {
@@ -115,18 +106,34 @@ export function MergePdf() {
                         }}
                     />
 
+                    <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
+                        <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-text-subtle)]">
+                            Merge mode
+                        </p>
+                        <div className="mt-3 flex flex-col gap-2">
+                            <label className="flex items-center gap-2 text-sm text-[var(--color-text)]">
+                                <input type="radio" name="mode" checked={mode === 'rows'} onChange={() => setMode('rows')} />
+                                Combine rows into one sheet
+                            </label>
+                            <label className="flex items-center gap-2 text-sm text-[var(--color-text)]">
+                                <input type="radio" name="mode" checked={mode === 'sheets'} onChange={() => setMode('sheets')} />
+                                Keep each file as a separate sheet
+                            </label>
+                        </div>
+                    </div>
+
                     {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}
-                    {isProcessing && <ProcessingState label="Merging your PDFs…" />}
+                    {isProcessing && <ProcessingState label="Merging your files…" />}
                 </div>
             )}
 
             {result && (
                 <SuccessState title="Merge complete">
                     <p className="text-sm text-[var(--color-text-muted)]">
-                        merged.pdf • {formatBytes(result.blob.size)}
+                        merged.xlsx • {formatBytes(result.blob.size)}
                     </p>
                     <div className="mt-4 flex flex-wrap gap-3">
-                        <a href={result.url} download="merged.pdf">
+                        <a href={result.url} download="merged.xlsx">
                             <PrimaryButton>Download</PrimaryButton>
                         </a>
                         <SecondaryButton onClick={reset}>Merge More Files</SecondaryButton>
@@ -142,7 +149,7 @@ export function MergePdf() {
                             onClick={handleMerge}
                             disabled={items.length < 2 || isProcessing}
                         >
-                            Merge PDFs
+                            Merge Files
                         </PrimaryButton>
                     </div>
                 </div>

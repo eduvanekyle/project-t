@@ -1,9 +1,12 @@
 import { Route, Routes } from 'react-router-dom'
 import { AppHeader } from './components/AppHeader'
+import { ExcelConverter } from './pages/ExcelConverter'
+import { ExcelToolsOverview } from './pages/ExcelToolsOverview'
 import { Home } from './pages/Home'
 import { ImageCompressor } from './pages/ImageCompressor'
 import { ImageConverter } from './pages/ImageConverter'
 import { ImageToolsOverview } from './pages/ImageToolsOverview'
+import { MergeExcel } from './pages/MergeExcel'
 import { MergePdf } from './pages/MergePdf'
 import { NotFound } from './pages/NotFound'
 import { PdfToImage } from './pages/PdfToImage'
@@ -22,6 +25,9 @@ function App() {
           <Route path="/pdf-tools" element={<PdfToolsOverview />} />
           <Route path="/pdf-tools/merge" element={<MergePdf />} />
           <Route path="/pdf-tools/to-image" element={<PdfToImage />} />
+          <Route path="/excel-tools" element={<ExcelToolsOverview />} />
+          <Route path="/excel-tools/converter" element={<ExcelConverter />} />
+          <Route path="/excel-tools/merge" element={<MergeExcel />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
