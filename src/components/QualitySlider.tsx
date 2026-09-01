@@ -18,7 +18,7 @@ export function QualitySlider({ value, onChange, label = 'Compression quality' }
                 step={1}
                 value={value}
                 onChange={(event) => onChange(Number(event.target.value))}
-                className="mt-3 h-1.5 w-full cursor-pointer appearance-none rounded-full bg-[var(--color-border)] accent-[#2f5fed]"
+                className="mt-3 h-1.5 w-full cursor-pointer appearance-none rounded-full bg-[var(--color-border)] accent-[var(--color-accent)]"
                 aria-label={label}
             />
             <div className="mt-1 flex justify-between text-xs text-[var(--color-text-subtle)]">

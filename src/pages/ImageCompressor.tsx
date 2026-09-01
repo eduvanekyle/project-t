@@ -118,7 +118,7 @@ export function ImageCompressor() {
                                 </div>
                                 <div>
                                     <p className="text-[var(--color-text-subtle)]">Saved</p>
-                                    <p className="font-medium text-emerald-600 dark:text-emerald-400">{saved}%</p>
+                                    <p className="font-medium text-success">{saved}%</p>
                                 </div>
                             </div>
                             <div className="mt-4 flex flex-wrap gap-3">
@@ -132,7 +132,7 @@ export function ImageCompressor() {
                 </div>
             )}
 
-            {error && file && <p className="mt-4 text-sm text-red-600 dark:text-red-400">{error}</p>}
+            {error && file && <p className="mt-4 text-sm text-danger">{error}</p>}
         </div>
     )
 }

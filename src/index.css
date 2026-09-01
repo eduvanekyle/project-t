@@ -5,8 +5,14 @@
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
-  --color-accent: #2f5fed;
-  --color-accent-hover: #2650cc;
+  --color-accent: #0d9488;
+  --color-accent-hover: #0f766e;
+  --color-accent-soft: color-mix(in srgb, var(--color-accent) 12%, transparent);
+
+  --color-success: #16a34a;
+  --color-success-soft: color-mix(in srgb, var(--color-success) 12%, transparent);
+  --color-danger: #dc2626;
+  --color-danger-soft: color-mix(in srgb, var(--color-danger) 12%, transparent);
 
   --radius-md: 0.5rem;
   --radius-lg: 0.65rem;
@@ -36,6 +42,11 @@
   --color-text: #eaeaec;
   --color-text-muted: #a3a3ab;
   --color-text-subtle: #74747c;
+
+  --color-accent: #2dd4bf;
+  --color-accent-hover: #5eead4;
+  --color-success: #4ade80;
+  --color-danger: #f87171;
 }
 
 @layer base {

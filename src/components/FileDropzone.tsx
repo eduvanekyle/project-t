@@ -44,7 +44,7 @@ export function FileDropzone({ accept, multiple = false, formatsLabel, onFiles, 
                 className={clsx(
                     'flex cursor-pointer flex-col items-center gap-3 rounded-lg border-2 border-dashed px-6 py-14 text-center transition-colors',
                     isDragActive
-                        ? 'border-accent bg-[color-mix(in_srgb,var(--color-accent)_8%,transparent)]'
+                        ? 'border-accent bg-accent-soft'
                         : 'border-[var(--color-border-strong)] bg-[var(--color-surface)] hover:bg-[var(--color-surface-hover)]',
                 )}
             >
@@ -74,7 +74,7 @@ export function FileDropzone({ accept, multiple = false, formatsLabel, onFiles, 
                     }}
                 />
             </div>
-            {error && <p className="mt-2 text-sm text-red-600 dark:text-red-400">{error}</p>}
+            {error && <p className="mt-2 text-sm text-danger">{error}</p>}
         </div>
     )
 }

@@ -136,7 +136,7 @@ export function ImageConverter() {
                 </div>
             )}
 
-            {error && file && <p className="mt-4 text-sm text-red-600 dark:text-red-400">{error}</p>}
+            {error && file && <p className="mt-4 text-sm text-danger">{error}</p>}
         </div>
     )
 }

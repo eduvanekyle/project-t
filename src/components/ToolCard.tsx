@@ -22,10 +22,6 @@ export function ToolCard({ icon, name, description, to }: Props) {
                 <h3 className="text-sm font-semibold text-[var(--color-text)]">{name}</h3>
                 <p className="mt-1 text-sm text-[var(--color-text-muted)]">{description}</p>
             </div>
-            <span className="mt-auto inline-flex items-center gap-1 text-sm font-medium text-accent">
-                Open tool
-                <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
-            </span>
         </Link>
     )
 }
