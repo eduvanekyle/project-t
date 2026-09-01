@@ -67,7 +67,18 @@ function uniqueSheetName(name: string, taken: Set<string>): string {
     return candidate
 }
 
-export async function mergeExcelFiles(files: File[], mode: MergeMode): Promise<Blob> {
+export interface MergeRowsOptions {
+    /** 1-based row number containing the column headers. */
+    headerRow: number
+    /** 1-based row number where the data begins (rows between the header and this are skipped). */
+    dataStartRow: number
+}
+
+export async function mergeExcelFiles(
+    files: File[],
+    mode: MergeMode,
+    rowsOptions: MergeRowsOptions = { headerRow: 1, dataStartRow: 2 },
+): Promise<Blob> {
     const workbooks = await Promise.all(files.map(readWorkbook))
     const merged = XLSX.utils.book_new()
 
@@ -82,6 +93,8 @@ export async function mergeExcelFiles(files: File[], mode: MergeMode): Promise<B
             }
         })
     } else {
+        const headerIndex = Math.max(0, rowsOptions.headerRow - 1)
+        const dataStartIndex = Math.max(headerIndex + 1, rowsOptions.dataStartRow - 1)
         const rows: unknown[][] = []
         let header: unknown[] | null = null
         for (const workbook of workbooks) {
@@ -89,10 +102,10 @@ export async function mergeExcelFiles(files: File[], mode: MergeMode): Promise<B
             const sheetRows = XLSX.utils.sheet_to_json<unknown[]>(workbook.Sheets[sheetName], { header: 1 })
             if (sheetRows.length === 0) continue
             if (header === null) {
-                header = sheetRows[0]
-                rows.push(header, ...sheetRows.slice(1))
+                header = sheetRows[headerIndex] ?? []
+                rows.push(header, ...sheetRows.slice(dataStartIndex))
             } else {
-                rows.push(...sheetRows.slice(1))
+                rows.push(...sheetRows.slice(dataStartIndex))
             }
         }
         const sheet = XLSX.utils.aoa_to_sheet(rows)

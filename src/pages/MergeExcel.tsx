@@ -18,6 +18,8 @@ interface Result {
 export function MergeExcel() {
     const [items, setItems] = useState<SortableFile[]>([])
     const [mode, setMode] = useState<MergeMode>('rows')
+    const [headerRow, setHeaderRow] = useState(1)
+    const [dataStartRow, setDataStartRow] = useState(2)
     const [error, setError] = useState<string | null>(null)
     const [isProcessing, setProcessing] = useState(false)
     const [result, setResult] = useState<Result | null>(null)
@@ -55,7 +57,10 @@ export function MergeExcel() {
         setProcessing(true)
         setError(null)
         try {
-            const blob = await mergeExcelFiles(items.map((item) => item.file), mode)
+            const blob = await mergeExcelFiles(items.map((item) => item.file), mode, {
+                headerRow,
+                dataStartRow,
+            })
             setResult({ blob, url: URL.createObjectURL(blob) })
         } catch {
             setError('Something went wrong while merging your files. Please try again.')
@@ -121,6 +126,47 @@ export function MergeExcel() {
                             </label>
                         </div>
                     </div>
+
+                    {mode === 'rows' && (
+                        <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
+                            <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-text-subtle)]">
+                                Custom layout
+                            </p>
+                            <p className="mt-1 text-sm text-[var(--color-text-muted)]">
+                                Use this if your headers aren't on row 1, or if there are extra rows between the
+                                header and the data.
+                            </p>
+                            <div className="mt-3 flex flex-wrap gap-4">
+                                <label className="flex flex-col gap-1 text-sm text-[var(--color-text)]">
+                                    Header row
+                                    <input
+                                        type="number"
+                                        min={1}
+                                        value={headerRow}
+                                        onChange={(event) => {
+                                            const value = Math.max(1, Number(event.target.value) || 1)
+                                            setHeaderRow(value)
+                                            setDataStartRow((current) => Math.max(current, value + 1))
+                                        }}
+                                        className="w-24 rounded-md border border-[var(--color-border)] bg-[var(--color-bg)] px-2 py-1"
+                                    />
+                                </label>
+                                <label className="flex flex-col gap-1 text-sm text-[var(--color-text)]">
+                                    Data starts at row
+                                    <input
+                                        type="number"
+                                        min={headerRow + 1}
+                                        value={dataStartRow}
+                                        onChange={(event) => {
+                                            const value = Math.max(headerRow + 1, Number(event.target.value) || headerRow + 1)
+                                            setDataStartRow(value)
+                                        }}
+                                        className="w-24 rounded-md border border-[var(--color-border)] bg-[var(--color-bg)] px-2 py-1"
+                                    />
+                                </label>
+                            </div>
+                        </div>
+                    )}
 
                     {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}
                     {isProcessing && <ProcessingState label="Merging your files…" />}
