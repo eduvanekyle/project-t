@@ -29,11 +29,25 @@ export const tools: ToolMeta[] = [
         path: '/pdf-tools/merge',
     },
     {
+        slug: 'pdf-compressor',
+        name: 'PDF Compressor',
+        description: 'Reduce PDF file size while preserving document content.',
+        category: 'pdf',
+        path: '/pdf-tools/compressor',
+    },
+    {
         slug: 'pdf-to-image',
         name: 'PDF to Image',
         description: 'Convert PDF pages into JPG or PNG images.',
         category: 'pdf',
         path: '/pdf-tools/to-image',
+    },
+    {
+        slug: 'sign-pdf',
+        name: 'Sign PDF',
+        description: 'Place a signature image onto a PDF page.',
+        category: 'pdf',
+        path: '/pdf-tools/sign',
     },
     {
         slug: 'excel-converter',

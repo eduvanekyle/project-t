@@ -11,6 +11,8 @@ import { MergePdf } from './pages/MergePdf'
 import { NotFound } from './pages/NotFound'
 import { PdfToImage } from './pages/PdfToImage'
 import { PdfToolsOverview } from './pages/PdfToolsOverview'
+import { PdfCompressor } from './pages/PdfCompressor'
+import { SignPdf } from './pages/SignPdf'
 
 function App() {
   return (
@@ -24,7 +26,9 @@ function App() {
           <Route path="/image-tools/compressor" element={<ImageCompressor />} />
           <Route path="/pdf-tools" element={<PdfToolsOverview />} />
           <Route path="/pdf-tools/merge" element={<MergePdf />} />
+          <Route path="/pdf-tools/compressor" element={<PdfCompressor />} />
           <Route path="/pdf-tools/to-image" element={<PdfToImage />} />
+          <Route path="/pdf-tools/sign" element={<SignPdf />} />
           <Route path="/excel-tools" element={<ExcelToolsOverview />} />
           <Route path="/excel-tools/converter" element={<ExcelConverter />} />
           <Route path="/excel-tools/merge" element={<MergeExcel />} />

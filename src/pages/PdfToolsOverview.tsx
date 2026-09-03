@@ -1,10 +1,12 @@
-import { FileStack, Images } from 'lucide-react'
+import { FileStack, Images, Shrink } from 'lucide-react'
 import { ToolCard } from '../components/ToolCard'
 import { tools } from '../lib/tools'
 
 const ICONS: Record<string, React.ReactNode> = {
     'merge-pdf': <FileStack size={18} aria-hidden="true" />,
+    'pdf-compressor': <Shrink size={18} aria-hidden="true" />,
     'pdf-to-image': <Images size={18} aria-hidden="true" />,
+    'sign-pdf': <FileStack size={18} aria-hidden="true" />,
 }
 
 export function PdfToolsOverview() {

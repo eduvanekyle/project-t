@@ -10,6 +10,7 @@ A lightweight, privacy-friendly file utility web app. Convert images, compress f
 
 ### PDF Tools
 - **Merge PDF** — Drag and drop multiple PDFs, reorder them, and merge into one document.
+- **PDF Compressor** — Reduce PDF file size while preserving document content.
 - **PDF to Image** — Export PDF pages as PNG or JPG, individually or as a zip.
 
 ### Excel Tools

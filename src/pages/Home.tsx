@@ -9,6 +9,7 @@ const ICONS: Record<string, React.ReactNode> = {
     'image-converter': <ImageIcon size={18} aria-hidden="true" />,
     'image-compressor': <Shrink size={18} aria-hidden="true" />,
     'merge-pdf': <FileStack size={18} aria-hidden="true" />,
+    'pdf-compressor': <Shrink size={18} aria-hidden="true" />,
     'pdf-to-image': <Images size={18} aria-hidden="true" />,
     'excel-converter': <FileSpreadsheet size={18} aria-hidden="true" />,
     'merge-excel': <Files size={18} aria-hidden="true" />,
