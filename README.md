@@ -5,17 +5,21 @@ A lightweight, privacy-friendly file utility web app. Convert images, compress f
 ## Features
 
 ### Image Tools
+
 - **Image Converter** — Convert between PNG, JPG, and WebP with automatic format detection.
 - **Image Compressor** — Adjust quality with a live before/after size comparison.
 
 ### PDF Tools
+
 - **Merge PDF** — Drag and drop multiple PDFs, reorder them, and merge into one document.
 - **PDF Compressor** — Reduce PDF file size while preserving document content.
 - **PDF to Image** — Export PDF pages as PNG or JPG, individually or as a zip.
 
 ### Excel Tools
+
 - **Excel Converter** — Convert between XLSX, XLS, and CSV with automatic format detection.
 - **Merge Excel** — Combine multiple spreadsheets into one file, either by stacking rows or keeping each file as its own sheet.
+- **JSON to CSV** — Convert JSON records into a CSV file, with a 30 MB limit.
 
 All processing happens client-side using the Canvas API, [pdf-lib](https://github.com/Hopding/pdf-lib), [pdf.js](https://github.com/mozilla/pdf.js), and [SheetJS](https://github.com/SheetJS/sheetjs) — your files never leave your device.
 
@@ -34,6 +38,7 @@ All processing happens client-side using the Canvas API, [pdf-lib](https://githu
 ## Getting Started
 
 ### Prerequisites
+
 - [Node.js](https://nodejs.org/) 20+
 
 ### Installation

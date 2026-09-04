@@ -63,4 +63,11 @@ export const tools: ToolMeta[] = [
         category: 'excel',
         path: '/excel-tools/merge',
     },
+    {
+        slug: 'json-to-csv',
+        name: 'JSON to CSV',
+        description: 'Convert JSON records into a CSV file.',
+        category: 'excel',
+        path: '/excel-tools/json-to-csv',
+    },
 ]

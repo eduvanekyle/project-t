@@ -7,6 +7,7 @@ import { ImageCompressor } from './pages/ImageCompressor'
 import { ImageConverter } from './pages/ImageConverter'
 import { ImageToolsOverview } from './pages/ImageToolsOverview'
 import { MergeExcel } from './pages/MergeExcel'
+import { JsonToCsv } from './pages/JsonToCsv'
 import { MergePdf } from './pages/MergePdf'
 import { NotFound } from './pages/NotFound'
 import { PdfToImage } from './pages/PdfToImage'
@@ -32,6 +33,7 @@ function App() {
           <Route path="/excel-tools" element={<ExcelToolsOverview />} />
           <Route path="/excel-tools/converter" element={<ExcelConverter />} />
           <Route path="/excel-tools/merge" element={<MergeExcel />} />
+          <Route path="/excel-tools/json-to-csv" element={<JsonToCsv />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
