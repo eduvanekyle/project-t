@@ -35,6 +35,40 @@ export async function getPdfPageCount(file: File): Promise<number> {
     return pdf.getPageCount()
 }
 
+export interface PdfSplitRange {
+    start: number
+    end: number
+}
+
+export interface PdfSplitResult {
+    label: string
+    blob: Blob
+}
+
+export async function splitPdf(file: File, ranges: PdfSplitRange[]): Promise<PdfSplitResult[]> {
+    const bytes = await file.arrayBuffer()
+    const source = await PDFDocument.load(bytes)
+    const pageCount = source.getPageCount()
+
+    const results: PdfSplitResult[] = []
+    for (const range of ranges) {
+        const start = Math.max(1, range.start)
+        const end = Math.min(pageCount, range.end)
+        if (start > end) continue
+
+        const output = await PDFDocument.create()
+        const indices = Array.from({ length: end - start + 1 }, (_, i) => start - 1 + i)
+        const pages = await output.copyPages(source, indices)
+        for (const page of pages) output.addPage(page)
+
+        const outputBytes = await output.save()
+        const label = start === end ? `page-${start}` : `pages-${start}-${end}`
+        results.push({ label, blob: new Blob([outputBytes as BlobPart], { type: 'application/pdf' }) })
+    }
+
+    return results
+}
+
 export type PdfCompressionLevel = 'low' | 'medium' | 'high'
 
 interface PdfCompressionProfile {

@@ -43,6 +43,13 @@ export const tools: ToolMeta[] = [
         path: '/pdf-tools/to-image',
     },
     {
+        slug: 'split-pdf',
+        name: 'Split PDF',
+        description: 'Extract page ranges or split every page into its own file.',
+        category: 'pdf',
+        path: '/pdf-tools/split',
+    },
+    {
         slug: 'sign-pdf',
         name: 'Sign PDF',
         description: 'Place a signature image onto a PDF page.',

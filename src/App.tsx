@@ -14,6 +14,7 @@ import { PdfToImage } from './pages/PdfToImage'
 import { PdfToolsOverview } from './pages/PdfToolsOverview'
 import { PdfCompressor } from './pages/PdfCompressor'
 import { SignPdf } from './pages/SignPdf'
+import { SplitPdf } from './pages/SplitPdf'
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/pdf-tools/compressor" element={<PdfCompressor />} />
           <Route path="/pdf-tools/to-image" element={<PdfToImage />} />
           <Route path="/pdf-tools/sign" element={<SignPdf />} />
+          <Route path="/pdf-tools/split" element={<SplitPdf />} />
           <Route path="/excel-tools" element={<ExcelToolsOverview />} />
           <Route path="/excel-tools/converter" element={<ExcelConverter />} />
           <Route path="/excel-tools/merge" element={<MergeExcel />} />

@@ -1,4 +1,4 @@
-import { FileJson, FileSpreadsheet, FileStack, Files, ImageIcon, Images, Shrink } from 'lucide-react'
+import { FileJson, FileSpreadsheet, FileStack, Files, ImageIcon, Images, Scissors, Shrink } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { PrimaryButton } from '../components/PrimaryButton'
 import { SecondaryButton } from '../components/SecondaryButton'
@@ -11,6 +11,7 @@ const ICONS: Record<string, React.ReactNode> = {
     'merge-pdf': <FileStack size={18} aria-hidden="true" />,
     'pdf-compressor': <Shrink size={18} aria-hidden="true" />,
     'pdf-to-image': <Images size={18} aria-hidden="true" />,
+    'split-pdf': <Scissors size={18} aria-hidden="true" />,
     'excel-converter': <FileSpreadsheet size={18} aria-hidden="true" />,
     'merge-excel': <Files size={18} aria-hidden="true" />,
     'json-to-csv': <FileJson size={18} aria-hidden="true" />,
