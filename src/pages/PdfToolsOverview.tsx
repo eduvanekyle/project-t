@@ -1,4 +1,4 @@
-import { FileStack, Images, Scissors, Shrink } from 'lucide-react'
+import { FileStack, Images, PenLine, Scissors, Shrink } from 'lucide-react'
 import { ToolCard } from '../components/ToolCard'
 import { tools } from '../lib/tools'
 
@@ -6,7 +6,7 @@ const ICONS: Record<string, React.ReactNode> = {
     'merge-pdf': <FileStack size={18} aria-hidden="true" />,
     'pdf-compressor': <Shrink size={18} aria-hidden="true" />,
     'pdf-to-image': <Images size={18} aria-hidden="true" />,
-    'sign-pdf': <FileStack size={18} aria-hidden="true" />,
+    'sign-pdf': <PenLine size={18} aria-hidden="true" />,
     'split-pdf': <Scissors size={18} aria-hidden="true" />,
 }
 
@@ -29,6 +29,7 @@ export function PdfToolsOverview() {
                         name={tool.name}
                         description={tool.description}
                         to={tool.path}
+                        category={tool.category}
                     />
                 ))}
             </div>

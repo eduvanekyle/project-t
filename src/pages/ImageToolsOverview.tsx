@@ -26,6 +26,7 @@ export function ImageToolsOverview() {
                         name={tool.name}
                         description={tool.description}
                         to={tool.path}
+                        category={tool.category}
                     />
                 ))}
             </div>

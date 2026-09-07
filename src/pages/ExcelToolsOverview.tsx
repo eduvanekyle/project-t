@@ -27,6 +27,7 @@ export function ExcelToolsOverview() {
                         name={tool.name}
                         description={tool.description}
                         to={tool.path}
+                        category={tool.category}
                     />
                 ))}
             </div>
