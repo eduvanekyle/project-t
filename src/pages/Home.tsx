@@ -27,7 +27,7 @@ export function Home() {
                 </h1>
                 <p className="mt-4 text-lg text-[var(--color-text-muted)]">
                     Convert images, compress files, merge PDFs, turn PDF pages into images, and work with
-                    spreadsheets — quickly and without unnecessary complexity.
+                    spreadsheets, quickly and without unnecessary complexity.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
                     <Link to="/image-tools">

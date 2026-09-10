@@ -1,28 +1,28 @@
 # Project T
 
-A lightweight, privacy-friendly file utility web app. Convert images, compress files, merge PDFs, and turn PDF pages into images — all processed locally in your browser. No files are ever uploaded to a server.
+A lightweight, privacy-friendly file utility web app. Convert images, compress files, merge PDFs, and turn PDF pages into images, all processed locally in your browser. No files are ever uploaded to a server.
 
 ## Features
 
 ### Image Tools
 
-- **Image Converter** — Convert between PNG, JPG, and WebP with automatic format detection.
-- **Image Compressor** — Adjust quality with a live before/after size comparison.
+- **Image Converter:** Convert between PNG, JPG, and WebP with automatic format detection.
+- **Image Compressor:** Adjust quality with a live before/after size comparison.
 
 ### PDF Tools
 
-- **Merge PDF** — Drag and drop multiple PDFs, reorder them, and merge into one document.
-- **PDF Compressor** — Reduce PDF file size while preserving document content.
-- **PDF to Image** — Export PDF pages as PNG or JPG, individually or as a zip.
-- **Split PDF** — Extract page ranges or split every page into its own file.
+- **Merge PDF:** Drag and drop multiple PDFs, reorder them, and merge into one document.
+- **PDF Compressor:** Reduce PDF file size while preserving document content.
+- **PDF to Image:** Export PDF pages as PNG or JPG, individually or as a zip.
+- **Split PDF:** Extract page ranges or split every page into its own file.
 
 ### Excel Tools
 
-- **Excel Converter** — Convert between XLSX, XLS, and CSV with automatic format detection.
-- **Merge Excel** — Combine multiple spreadsheets into one file, either by stacking rows or keeping each file as its own sheet.
-- **JSON to CSV** — Convert JSON records into a CSV file, with a 30 MB limit.
+- **Excel Converter:** Convert between XLSX, XLS, and CSV with automatic format detection.
+- **Merge Excel:** Combine multiple spreadsheets into one file, either by stacking rows or keeping each file as its own sheet.
+- **JSON to CSV:** Convert JSON records into a CSV file, with a 30 MB limit.
 
-All processing happens client-side using the Canvas API, [pdf-lib](https://github.com/Hopding/pdf-lib), [pdf.js](https://github.com/mozilla/pdf.js), and [SheetJS](https://github.com/SheetJS/sheetjs) — your files never leave your device.
+All processing happens client-side using the Canvas API, [pdf-lib](https://github.com/Hopding/pdf-lib), [pdf.js](https://github.com/mozilla/pdf.js), and [SheetJS](https://github.com/SheetJS/sheetjs), so your files never leave your device.
 
 ## Tech Stack
 
