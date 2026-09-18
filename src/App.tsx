@@ -14,6 +14,8 @@ import { PdfToImage } from './pages/PdfToImage'
 import { PdfToolsOverview } from './pages/PdfToolsOverview'
 import { PdfCompressor } from './pages/PdfCompressor'
 import { SignPdf } from './pages/SignPdf'
+import { SmartMergeExcel } from './pages/SmartMergeExcel'
+import { SplitExcel } from './pages/SplitExcel'
 import { SplitPdf } from './pages/SplitPdf'
 
 function App() {
@@ -35,6 +37,8 @@ function App() {
           <Route path="/excel-tools" element={<ExcelToolsOverview />} />
           <Route path="/excel-tools/converter" element={<ExcelConverter />} />
           <Route path="/excel-tools/merge" element={<MergeExcel />} />
+          <Route path="/excel-tools/smart-merge" element={<SmartMergeExcel />} />
+          <Route path="/excel-tools/split" element={<SplitExcel />} />
           <Route path="/excel-tools/json-to-csv" element={<JsonToCsv />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

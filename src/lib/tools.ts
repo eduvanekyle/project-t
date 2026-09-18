@@ -71,6 +71,20 @@ export const tools: ToolMeta[] = [
         path: '/excel-tools/merge',
     },
     {
+        slug: 'smart-merge-excel',
+        name: 'Smart Merge Excel',
+        description: 'Merge spreadsheets with different or reordered headers.',
+        category: 'excel',
+        path: '/excel-tools/smart-merge',
+    },
+    {
+        slug: 'split-excel',
+        name: 'Split Excel',
+        description: 'Turn every sheet in a workbook into its own file.',
+        category: 'excel',
+        path: '/excel-tools/split',
+    },
+    {
         slug: 'json-to-csv',
         name: 'JSON to CSV',
         description: 'Convert JSON records into a CSV file.',

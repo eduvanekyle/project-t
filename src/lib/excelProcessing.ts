@@ -55,6 +55,32 @@ export async function getSheetNames(file: File): Promise<string[]> {
     return workbook.SheetNames
 }
 
+export interface SheetSplitResult {
+    sheetName: string
+    blob: Blob
+}
+
+function visibleSheetNames(workbook: XLSX.WorkBook): string[] {
+    const sheetProps = workbook.Workbook?.Sheets
+    return workbook.SheetNames.filter((_, index) => !sheetProps?.[index]?.Hidden)
+}
+
+export async function splitExcelSheets(file: File, format: ExcelFormat = 'xlsx'): Promise<SheetSplitResult[]> {
+    const workbook = await readWorkbook(file)
+
+    return visibleSheetNames(workbook).map((sheetName) => {
+        if (format === 'csv') {
+            const csv = XLSX.utils.sheet_to_csv(workbook.Sheets[sheetName])
+            return { sheetName, blob: new Blob([csv], { type: MIME_BY_FORMAT.csv }) }
+        }
+
+        const single = XLSX.utils.book_new()
+        XLSX.utils.book_append_sheet(single, workbook.Sheets[sheetName], sheetName)
+        const output = XLSX.write(single, { bookType: format, type: 'array' })
+        return { sheetName, blob: new Blob([output], { type: MIME_BY_FORMAT[format] }) }
+    })
+}
+
 function uniqueSheetName(name: string, taken: Set<string>): string {
     let candidate = name.slice(0, 31) || 'Sheet'
     let suffix = 1
@@ -112,6 +138,58 @@ export async function mergeExcelFiles(
         XLSX.utils.book_append_sheet(merged, sheet, 'Merged')
     }
 
+    const output = XLSX.write(merged, { bookType: 'xlsx', type: 'array' })
+    return new Blob([output], { type: MIME_BY_FORMAT.xlsx })
+}
+
+const SOURCE_FILE_HEADER = 'Source File'
+
+export async function mergeExcelFilesByHeader(
+    files: File[],
+    rowsOptions: MergeRowsOptions = { headerRow: 1, dataStartRow: 2 },
+): Promise<Blob> {
+    const workbooks = await Promise.all(files.map(readWorkbook))
+    const headerIndex = Math.max(0, rowsOptions.headerRow - 1)
+    const dataStartIndex = Math.max(headerIndex + 1, rowsOptions.dataStartRow - 1)
+
+    // Union of headers in first-seen order, so new columns from later files are appended.
+    const headers: string[] = [SOURCE_FILE_HEADER]
+    const headerSet = new Set<string>([SOURCE_FILE_HEADER])
+    const fileRecords: Record<string, unknown>[][] = []
+
+    workbooks.forEach((workbook, fileIndex) => {
+        const sourceName = files[fileIndex].name.replace(/\.[^./]+$/, '')
+        const sheetName = workbook.SheetNames[0]
+        const sheetRows = XLSX.utils.sheet_to_json<unknown[]>(workbook.Sheets[sheetName], { header: 1 })
+        const fileHeader = (sheetRows[headerIndex] ?? []).map((cell) => String(cell ?? '').trim())
+        for (const name of fileHeader) {
+            if (name && !headerSet.has(name)) {
+                headerSet.add(name)
+                headers.push(name)
+            }
+        }
+
+        const records = sheetRows.slice(dataStartIndex).map((row) => {
+            const record: Record<string, unknown> = { [SOURCE_FILE_HEADER]: sourceName }
+            fileHeader.forEach((name, columnIndex) => {
+                if (name) record[name] = row[columnIndex]
+            })
+            return record
+        })
+        fileRecords.push(records)
+    })
+
+    // Look up each cell by header name so column order and missing columns don't matter.
+    const rows: unknown[][] = [headers]
+    for (const records of fileRecords) {
+        for (const record of records) {
+            rows.push(headers.map((name) => record[name] ?? ''))
+        }
+    }
+
+    const sheet = XLSX.utils.aoa_to_sheet(rows)
+    const merged = XLSX.utils.book_new()
+    XLSX.utils.book_append_sheet(merged, sheet, 'Merged')
     const output = XLSX.write(merged, { bookType: 'xlsx', type: 'array' })
     return new Blob([output], { type: MIME_BY_FORMAT.xlsx })
 }

@@ -1,10 +1,12 @@
-import { FileJson, FileSpreadsheet, Files } from 'lucide-react'
+import { FileJson, FileSpreadsheet, Files, Scissors, Wand2 } from 'lucide-react'
 import { ToolCard } from '../components/ToolCard'
 import { tools } from '../lib/tools'
 
 const ICONS: Record<string, React.ReactNode> = {
     'excel-converter': <FileSpreadsheet size={18} aria-hidden="true" />,
     'merge-excel': <Files size={18} aria-hidden="true" />,
+    'smart-merge-excel': <Wand2 size={18} aria-hidden="true" />,
+    'split-excel': <Scissors size={18} aria-hidden="true" />,
     'json-to-csv': <FileJson size={18} aria-hidden="true" />,
 }
 
