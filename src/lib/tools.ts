@@ -59,7 +59,7 @@ export const tools: ToolMeta[] = [
     {
         slug: 'excel-converter',
         name: 'Excel Converter',
-        description: 'Convert between XLSX, XLS, and CSV files.',
+        description: 'Convert spreadsheets to XLSX, XLS, CSV, or JSON.',
         category: 'excel',
         path: '/excel-tools/converter',
     },

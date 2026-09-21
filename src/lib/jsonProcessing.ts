@@ -1,5 +1,5 @@
-// export const MAX_JSON_FILE_SIZE = 200 * 1024 * 1024
-export const MAX_JSON_FILE_SIZE = 30 * 1024 * 1024
+export const MAX_JSON_FILE_SIZE = 200 * 1024 * 1024
+// export const MAX_JSON_FILE_SIZE = 30 * 1024 * 1024
 
 type JsonValue = null | boolean | number | string | JsonValue[] | { [key: string]: JsonValue }
 

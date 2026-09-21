@@ -12,15 +12,17 @@ import {
     ACCEPTED_EXCEL_TYPES,
     convertExcel,
     detectExcelFormat,
+    type ConversionFormat,
     type ExcelFormat,
     formatLabel,
     replaceExtension,
 } from '../lib/excelProcessing'
 
-const FORMAT_OPTIONS: { value: ExcelFormat; label: string }[] = [
+const FORMAT_OPTIONS: { value: ConversionFormat; label: string }[] = [
     { value: 'xlsx', label: 'XLSX' },
     { value: 'xls', label: 'XLS' },
     { value: 'csv', label: 'CSV' },
+    { value: 'json', label: 'JSON' },
 ]
 
 interface Result {
@@ -32,7 +34,7 @@ interface Result {
 export function ExcelConverter() {
     const [file, setFile] = useState<File | null>(null)
     const [sourceFormat, setSourceFormat] = useState<ExcelFormat | null>(null)
-    const [targetFormat, setTargetFormat] = useState<ExcelFormat | null>(null)
+    const [targetFormat, setTargetFormat] = useState<ConversionFormat | null>(null)
     const [error, setError] = useState<string | null>(null)
     const [isProcessing, setProcessing] = useState(false)
     const [result, setResult] = useState<Result | null>(null)
@@ -80,7 +82,7 @@ export function ExcelConverter() {
                 backTo="/excel-tools"
                 backLabel="Back to tools"
                 title="Excel Converter"
-                description="Convert between XLSX, XLS, and CSV files."
+                description="Convert XLSX, XLS, and CSV files to Excel formats, CSV, or JSON."
             />
 
             {!file && (

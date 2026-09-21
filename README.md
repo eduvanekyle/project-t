@@ -18,7 +18,7 @@ A lightweight, privacy-friendly file utility web app for reshaping and transform
 
 ### Excel Tools
 
-- **Excel Converter:** Convert between XLSX, XLS, and CSV with automatic format detection.
+- **Excel Converter:** Convert XLSX, XLS, and CSV files to Excel formats, CSV, or JSON.
 - **Merge Excel:** Combine multiple spreadsheets into one file, either by stacking rows or keeping each file as its own sheet.
 - **Smart Merge Excel:** Merge spreadsheets by matching column headers instead of position, so files with reordered or mismatched columns still align correctly. New headers are added automatically, and a "Source File" column tracks which file each row came from.
 - **Split Excel:** Turn every visible sheet in a workbook into its own file, skipping hidden sheets.

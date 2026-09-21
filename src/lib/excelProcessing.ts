@@ -1,18 +1,21 @@
 import * as XLSX from 'xlsx'
 
 export type ExcelFormat = 'xlsx' | 'xls' | 'csv'
+export type ConversionFormat = ExcelFormat | 'json'
 export type MergeMode = 'rows' | 'sheets'
 
-const MIME_BY_FORMAT: Record<ExcelFormat, string> = {
+const MIME_BY_FORMAT: Record<ConversionFormat, string> = {
     xlsx: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     xls: 'application/vnd.ms-excel',
     csv: 'text/csv',
+    json: 'application/json',
 }
 
-const EXTENSION_BY_FORMAT: Record<ExcelFormat, string> = {
+const EXTENSION_BY_FORMAT: Record<ConversionFormat, string> = {
     xlsx: '.xlsx',
     xls: '.xls',
     csv: '.csv',
+    json: '.json',
 }
 
 export const ACCEPTED_EXCEL_TYPES = ['.xlsx', '.xls', '.csv']
@@ -27,7 +30,7 @@ export function formatLabel(format: ExcelFormat): string {
     return format.toUpperCase()
 }
 
-export function replaceExtension(filename: string, format: ExcelFormat): string {
+export function replaceExtension(filename: string, format: ConversionFormat): string {
     const base = filename.replace(/\.[^./]+$/, '')
     return `${base}${EXTENSION_BY_FORMAT[format]}`
 }
@@ -37,8 +40,14 @@ async function readWorkbook(file: File): Promise<XLSX.WorkBook> {
     return XLSX.read(buffer, { type: 'array' })
 }
 
-export async function convertExcel(file: File, targetFormat: ExcelFormat): Promise<Blob> {
+export async function convertExcel(file: File, targetFormat: ConversionFormat): Promise<Blob> {
     const workbook = await readWorkbook(file)
+
+    if (targetFormat === 'json') {
+        const sheetName = workbook.SheetNames[0]
+        const records = XLSX.utils.sheet_to_json<Record<string, unknown>>(workbook.Sheets[sheetName])
+        return new Blob([JSON.stringify(records, null, 2)], { type: MIME_BY_FORMAT.json })
+    }
 
     if (targetFormat === 'csv') {
         const sheetName = workbook.SheetNames[0]
