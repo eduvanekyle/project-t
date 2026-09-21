@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://weave.eduvane.info/</loc></url>
+  <url><loc>https://weave.eduvane.info/image-tools</loc></url>
+  <url><loc>https://weave.eduvane.info/image-tools/converter</loc></url>
+  <url><loc>https://weave.eduvane.info/image-tools/compressor</loc></url>
+  <url><loc>https://weave.eduvane.info/pdf-tools</loc></url>
+  <url><loc>https://weave.eduvane.info/pdf-tools/merge</loc></url>
+  <url><loc>https://weave.eduvane.info/pdf-tools/compressor</loc></url>
+  <url><loc>https://weave.eduvane.info/pdf-tools/to-image</loc></url>
+  <url><loc>https://weave.eduvane.info/pdf-tools/sign</loc></url>
+  <url><loc>https://weave.eduvane.info/pdf-tools/split</loc></url>
+  <url><loc>https://weave.eduvane.info/excel-tools</loc></url>
+  <url><loc>https://weave.eduvane.info/excel-tools/converter</loc></url>
+  <url><loc>https://weave.eduvane.info/excel-tools/merge</loc></url>
+  <url><loc>https://weave.eduvane.info/excel-tools/smart-merge</loc></url>
+  <url><loc>https://weave.eduvane.info/excel-tools/split</loc></url>
+  <url><loc>https://weave.eduvane.info/excel-tools/unpivot</loc></url>
+  <url><loc>https://weave.eduvane.info/excel-tools/json-to-csv</loc></url>
+</urlset>

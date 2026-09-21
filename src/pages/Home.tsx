@@ -26,11 +26,11 @@ export function Home() {
         <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
             <section className="max-w-2xl">
                 <h1 className="text-3xl font-semibold tracking-tight text-[var(--color-text)] sm:text-4xl">
-                    Simple tools for working with your files.
+                    Free online tools for Excel, PDF, image, and JSON files.
                 </h1>
                 <p className="mt-4 text-lg text-[var(--color-text-muted)]">
-                    Convert images, compress files, merge PDFs, turn PDF pages into images, and work with
-                    spreadsheets, quickly and without unnecessary complexity.
+                    Convert, compress, merge, split, and reshape files privately in your browser. Weave never uploads
+                    your files.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
                     <Link to="/image-tools">

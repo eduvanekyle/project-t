@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import { AppHeader } from './components/AppHeader'
+import { Seo } from './components/Seo'
 import { ExcelConverter } from './pages/ExcelConverter'
 import { ExcelToolsOverview } from './pages/ExcelToolsOverview'
 import { Home } from './pages/Home'
@@ -22,6 +23,7 @@ import { UnpivotExcel } from './pages/UnpivotExcel'
 function App() {
   return (
     <div className="flex min-h-svh flex-col">
+      <Seo />
       <AppHeader />
       <main className="flex-1">
         <Routes>
