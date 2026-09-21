@@ -10,7 +10,7 @@ interface ThemeContextValue {
 const ThemeContext = createContext<ThemeContextValue | null>(null)
 
 function getInitialTheme(): Theme {
-    const stored = localStorage.getItem('project-t-theme')
+    const stored = localStorage.getItem('weave-theme') ?? localStorage.getItem('project-t-theme')
     if (stored === 'light' || stored === 'dark') return stored
     return 'light'
     // return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
@@ -21,7 +21,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
     useEffect(() => {
         document.documentElement.classList.toggle('dark', theme === 'dark')
-        localStorage.setItem('project-t-theme', theme)
+        localStorage.setItem('weave-theme', theme)
     }, [theme])
 
     const toggleTheme = () => setTheme((current) => (current === 'dark' ? 'light' : 'dark'))

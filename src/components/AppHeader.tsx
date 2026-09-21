@@ -18,10 +18,8 @@ export function AppHeader() {
         <header className="sticky top-0 z-40 border-b border-[var(--color-border)] bg-[var(--color-bg)]/90 backdrop-blur">
             <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
                 <NavLink to="/" className="flex items-center gap-2" onClick={() => setMenuOpen(false)}>
-                    <span className="flex h-7 w-7 items-center justify-center rounded-md bg-accent text-sm font-bold text-white">
-                        T
-                    </span>
-                    <span className="text-sm font-semibold text-[var(--color-text)]">Project T</span>
+                    <img src="/weave-app-logo.svg" alt="" className="h-7 w-7" />
+                    <span className="text-sm font-semibold text-[var(--color-text)]">Weave</span>
                 </NavLink>
 
                 <nav className="hidden items-center gap-1 sm:flex">

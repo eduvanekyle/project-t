@@ -1,6 +1,6 @@
-# Project T
+# Weave
 
-A lightweight, privacy-friendly file utility web app. Convert images, compress files, merge PDFs, and turn PDF pages into images, all processed locally in your browser. No files are ever uploaded to a server.
+A lightweight, privacy-friendly file utility web app for reshaping and transforming files. Weave converts images, compresses files, merges PDFs, and transforms spreadsheets, all locally in your browser. No files are ever uploaded to a server.
 
 ## Features
 
@@ -22,6 +22,7 @@ A lightweight, privacy-friendly file utility web app. Convert images, compress f
 - **Merge Excel:** Combine multiple spreadsheets into one file, either by stacking rows or keeping each file as its own sheet.
 - **Smart Merge Excel:** Merge spreadsheets by matching column headers instead of position, so files with reordered or mismatched columns still align correctly. New headers are added automatically, and a "Source File" column tracks which file each row came from.
 - **Split Excel:** Turn every visible sheet in a workbook into its own file, skipping hidden sheets.
+- **Unpivot Excel:** Turn selected spreadsheet columns into identifier, attribute, and value rows, with an option to skip null values.
 - **JSON to CSV:** Convert JSON records into a CSV file, with a 30 MB limit.
 
 All processing happens client-side using the Canvas API, [pdf-lib](https://github.com/Hopding/pdf-lib), [pdf.js](https://github.com/mozilla/pdf.js), and [SheetJS](https://github.com/SheetJS/sheetjs), so your files never leave your device.
