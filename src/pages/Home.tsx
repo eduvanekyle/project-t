@@ -1,4 +1,4 @@
-import { FileJson, FileSpreadsheet, FileStack, Files, ImageIcon, Images, PenLine, Scissors, Shrink } from 'lucide-react'
+import { ArrowDownUp, FileJson, FileSpreadsheet, FileStack, Files, ImageIcon, Images, PenLine, Scissors, Shrink, Wand2 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { PrimaryButton } from '../components/PrimaryButton'
 import { SecondaryButton } from '../components/SecondaryButton'
@@ -15,6 +15,9 @@ const ICONS: Record<string, React.ReactNode> = {
     'split-pdf': <Scissors size={18} aria-hidden="true" />,
     'excel-converter': <FileSpreadsheet size={18} aria-hidden="true" />,
     'merge-excel': <Files size={18} aria-hidden="true" />,
+    'smart-merge-excel': <Wand2 size={18} aria-hidden="true" />,
+    'split-excel': <Scissors size={18} aria-hidden="true" />,
+    'unpivot-excel': <ArrowDownUp size={18} aria-hidden="true" />,
     'json-to-csv': <FileJson size={18} aria-hidden="true" />,
 }
 

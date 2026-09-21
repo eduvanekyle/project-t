@@ -55,6 +55,14 @@ export async function getSheetNames(file: File): Promise<string[]> {
     return workbook.SheetNames
 }
 
+export async function getExcelHeaders(file: File, headerRow = 1): Promise<string[]> {
+    const workbook = await readWorkbook(file)
+    const sheetName = workbook.SheetNames[0]
+    const rows = XLSX.utils.sheet_to_json<unknown[]>(workbook.Sheets[sheetName], { header: 1 })
+    const headers = rows[Math.max(0, headerRow - 1)] ?? []
+    return headers.map((cell, index) => String(cell ?? '').trim() || `Column ${index + 1}`)
+}
+
 export interface SheetSplitResult {
     sheetName: string
     blob: Blob
@@ -98,6 +106,50 @@ export interface MergeRowsOptions {
     headerRow: number
     /** 1-based row number where the data begins (rows between the header and this are skipped). */
     dataStartRow: number
+}
+
+export interface UnpivotOptions {
+    /** 1-based row number containing the column headers. */
+    headerRow: number
+    /** 1-based row number where the data begins (rows between the header and this are skipped). */
+    dataStartRow: number
+    /** Zero-based column indexes whose values should be repeated on every output row. */
+    identifierColumnIndexes: number[]
+    /** Omit output rows whose value cell is null, undefined, or empty. */
+    skipNullValues: boolean
+}
+
+export async function unpivotExcel(file: File, options: UnpivotOptions): Promise<Blob> {
+    const workbook = await readWorkbook(file)
+    const sheetName = workbook.SheetNames[0]
+    const sheetRows = XLSX.utils.sheet_to_json<unknown[]>(workbook.Sheets[sheetName], { header: 1 })
+    const headerIndex = Math.max(0, options.headerRow - 1)
+    const dataStartIndex = Math.max(headerIndex + 1, options.dataStartRow - 1)
+    const rawHeaders = sheetRows[headerIndex] ?? []
+    const headers = rawHeaders.map((cell, index) => String(cell ?? '').trim() || `Column ${index + 1}`)
+    const identifierIndexes = new Set(options.identifierColumnIndexes)
+    const valueIndexes = headers.map((_, index) => index).filter((index) => !identifierIndexes.has(index))
+    const rows: unknown[][] = [
+        [...options.identifierColumnIndexes.map((index) => headers[index]), 'Attribute', 'Value'],
+    ]
+
+    for (const row of sheetRows.slice(dataStartIndex)) {
+        for (const valueIndex of valueIndexes) {
+            const value = row[valueIndex]
+            if (options.skipNullValues && (value === null || value === undefined || value === '')) continue
+            rows.push([
+                ...options.identifierColumnIndexes.map((index) => row[index] ?? ''),
+                headers[valueIndex],
+                value ?? '',
+            ])
+        }
+    }
+
+    const outputSheet = XLSX.utils.aoa_to_sheet(rows)
+    const outputWorkbook = XLSX.utils.book_new()
+    XLSX.utils.book_append_sheet(outputWorkbook, outputSheet, 'Unpivoted')
+    const output = XLSX.write(outputWorkbook, { bookType: 'xlsx', type: 'array' })
+    return new Blob([output], { type: MIME_BY_FORMAT.xlsx })
 }
 
 export async function mergeExcelFiles(

@@ -17,6 +17,7 @@ import { SignPdf } from './pages/SignPdf'
 import { SmartMergeExcel } from './pages/SmartMergeExcel'
 import { SplitExcel } from './pages/SplitExcel'
 import { SplitPdf } from './pages/SplitPdf'
+import { UnpivotExcel } from './pages/UnpivotExcel'
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
           <Route path="/excel-tools/merge" element={<MergeExcel />} />
           <Route path="/excel-tools/smart-merge" element={<SmartMergeExcel />} />
           <Route path="/excel-tools/split" element={<SplitExcel />} />
+          <Route path="/excel-tools/unpivot" element={<UnpivotExcel />} />
           <Route path="/excel-tools/json-to-csv" element={<JsonToCsv />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

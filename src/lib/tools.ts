@@ -85,6 +85,13 @@ export const tools: ToolMeta[] = [
         path: '/excel-tools/split',
     },
     {
+        slug: 'unpivot-excel',
+        name: 'Unpivot Excel',
+        description: 'Turn columns into attribute and value rows.',
+        category: 'excel',
+        path: '/excel-tools/unpivot',
+    },
+    {
         slug: 'json-to-csv',
         name: 'JSON to CSV',
         description: 'Convert JSON records into a CSV file.',
