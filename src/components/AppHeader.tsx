@@ -19,7 +19,9 @@ export function AppHeader() {
             <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
                 <NavLink to="/" className="flex items-center gap-2" onClick={() => setMenuOpen(false)}>
                     <img src="/weave-app-logo.svg" alt="" className="h-7 w-7" />
-                    <span className="text-sm font-semibold text-[var(--color-text)]">Weave</span>
+                    <span className="flex items-baseline gap-2">
+                        <span className="text-base font-semibold tracking-tight text-[var(--color-text)]">Weave</span>
+                    </span>
                 </NavLink>
 
                 <nav className="hidden items-center gap-1 sm:flex">

@@ -11,14 +11,14 @@ export function ImageToolsOverview() {
     const imageTools = tools.filter((tool) => tool.category === 'image')
 
     return (
-        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+        <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12">
             <h1 className="text-2xl font-semibold tracking-tight text-[var(--color-text)] sm:text-3xl">
                 Image Tools
             </h1>
             <p className="mt-2 max-w-xl text-[var(--color-text-muted)]">
                 Convert between formats or reduce file size, entirely in your browser.
             </p>
-            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="mt-7 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {imageTools.map((tool) => (
                     <ToolCard
                         key={tool.slug}

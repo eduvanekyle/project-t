@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 interface Props {
@@ -28,9 +29,16 @@ export function ToolCard({ icon, name, description, to, category }: Props) {
             >
                 {icon}
             </div>
-            <div>
-                <h3 className="text-sm font-semibold text-[var(--color-text)]">{name}</h3>
-                <p className="mt-1 text-sm text-[var(--color-text-muted)]">{description}</p>
+            <div className="flex items-end justify-between gap-3">
+                <div>
+                    <h3 className="text-sm font-semibold text-[var(--color-text)]">{name}</h3>
+                    <p className="mt-1 text-sm text-[var(--color-text-muted)]">{description}</p>
+                </div>
+                <ArrowUpRight
+                    size={17}
+                    aria-hidden="true"
+                    className="mb-0.5 shrink-0 text-[var(--color-text-subtle)] transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--color-text)]"
+                />
             </div>
         </Link>
     )

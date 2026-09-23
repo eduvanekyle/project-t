@@ -17,6 +17,12 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Weave" />
     <title>Weave | Free online file tools</title>
+    <script>
+      const theme =
+        localStorage.getItem("weave-theme") ??
+        localStorage.getItem("project-t-theme");
+      if (theme === "dark") document.documentElement.classList.add("dark");
+    </script>
   </head>
 
   <body>
